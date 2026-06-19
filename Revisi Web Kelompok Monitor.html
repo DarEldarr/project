@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Presentasi - Literasi Digital Premium (Calm Edition)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        /* ==========================================================================
+           1. BASE CORE & FUTURISTIC BACKGROUND SYSTEM
+           ========================================================================== */
+        :root {
+            --neon-cyan: #00f2fe;
+            --neon-purple: #9d4edd;
+            --grid-color: rgba(0, 242, 254, 0.02);
+        }
+
+        html, body {
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            color: #ffffff;
+            background-color: #020206;
+            background-image: 
+                linear-gradient(var(--grid-color) 1px, transparent 1px),
+                linear-gradient(90deg, var(--grid-color) 1px, transparent 1px),
+                linear-gradient(135deg, #020208 0%, #040312 50%, #0a0418 100%);
+            background-size: 60px 60px, 60px 60px, 100% 100%;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        .font-cyber {
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        /* Transisi Slide Pop Up */
+        .slide-active {
+            display: flex !important;
+            animation: cyberPop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+        }
+
+        @keyframes cyberPop {
+            from { opacity: 0; transform: scale(0.98) translateY(8px); }
+            to { opacity: 1; transform: scale(1) translateY(0); }
+        }
+
+        @keyframes neonTextCalm {
+            0%, 100% { filter: drop-shadow(0 0 4px rgba(0, 242, 254, 0.3)); }
+            50% { filter: drop-shadow(0 0 12px rgba(0, 242, 254, 0.6)); }
+        }
+        .text-glow-cyber { animation: neonTextCalm 3s infinite ease-in-out; }
+
+        @keyframes neonCardPulse {
+            0%, 100% { border-color: rgba(255, 255, 255, 0.06); box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6); }
+            50% { border-color: rgba(0, 242, 254, 0.15); box-shadow: 0 0 25px rgba(0, 242, 254, 0.05); }
+        }
+        .cyber-card {
+            background: rgba(6, 7, 16, 0.8) !important;
+            backdrop-filter: blur(20px) !important;
+            -webkit-backdrop-filter: blur(20px) !important;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            animation: neonCardPulse 6s infinite ease-in-out;
+        }
+
+        .star-container {
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            pointer-events: none; z-index: 1; overflow: hidden;
+        }
+        .star {
+            position: absolute; background-color: #ffffff; border-radius: 50%; opacity: 0;
+            box-shadow: 0 0 4px #ffffff; animation: twinkle ease-in-out infinite;
+        }
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.05; transform: scale(0.8); }
+            50% { opacity: 0.5; transform: scale(1.1); }
+        }
+
+        .glow-orb {
+            position: absolute; border-radius: 50%; filter: blur(150px); opacity: 0.25;
+            pointer-events: none; z-index: 0; animation: floatGlow 25s infinite alternate ease-in-out;
+        }
+        .orb-1 { top: -10%; left: 10%; width: 500px; height: 500px; background: var(--neon-cyan); }
+        .orb-2 { bottom: -10%; right: 5%; width: 550px; height: 550px; background: var(--neon-purple); animation-delay: -5s; }
+
+        @keyframes floatGlow {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(30px, -20px) scale(1.02); }
+        }
+        
+        .corner-bracket {
+            position: absolute; width: 12px; height: 12px;
+            border: 1.5px solid rgba(0, 242, 254, 0.2); pointer-events: none; transition: all 0.3s;
+        }
+        .cyber-card:hover .corner-bracket { border-color: var(--neon-cyan); box-shadow: 0 0 4px var(--neon-cyan); }
+        .cb-tl { top: 12px; left: 12px; border-right: none; border-bottom: none; }
+        .cb-tr { top: 12px; right: 12px; border-left: none; border-bottom: none; }
+        .cb-bl { bottom: 12px; left: 12px; border-right: none; border-top: none; }
+        .cb-br { bottom: 12px; right: 12px; border-left: none; border-top: none; }
+        .anim-float { animation: floatingAsset 6s ease-in-out infinite; }
+        @keyframes floatingAsset { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-6px); } }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between select-none relative">
+
+    <div class="absolute inset-0 overflow-hidden pointer-events-none z-0">
+        <div class="glow-orb orb-1"></div>
+        <div class="glow-orb orb-2"></div>
+    </div>
+
+    <!-- HEADER / NAVBAR -->
+    <header class="w-full px-6 py-4 bg-black/20 backdrop-blur-md flex justify-between items-center z-50 border-b border-white/5">
+        <div class="flex items-center gap-3">
+           <div class="flex items-center justify-center w-11 h-11">
+    <img
+        src="logosekolah.png" alt="Logo Sekolah"
+    >
+</div>
+            <span class="text-xs tracking-widest font-bold text-white/90 font-cyber">CYBER LITERACY</span>
+        </div>
+        <div class="flex items-center gap-5">
+            <button onclick="toggleProfileModal(true)" class="px-3 py-1.5 rounded-lg bg-cyan-500/10 hover:bg-cyan-500/20 border border-cyan-400/30 text-cyan-300 text-[10px] font-bold tracking-wider uppercase font-cyber transition active:scale-95">
+                💻 Team Profile
+            </button>
+        </div>
+    </header>
+
+    <!-- CONTAINER UTAMA SLIDE PRESENTASI -->
+    <main class="flex-grow flex items-center justify-center p-4 md:p-8 w-full max-w-6xl mx-auto z-10 relative">
+        
+        <!-- SLIDE 1: HOME -->
+        <section id="slide-1" class="slide flex-col items-center text-center hidden w-full slide-active">
+            <div class="mb-4 tracking-widest text-cyan-400/80 font-cyber text-[9px] font-bold uppercase bg-cyan-500/5 px-4 py-1 rounded-full border border-cyan-500/10">
+                🚀 EDUKASI GENERASI MUDA
+            </div>
+            <h1 class="text-5xl md:text-8xl font-black font-cyber uppercase tracking-tight text-white mb-6 leading-none">
+                LITERASI<br><span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-purple-400 to-pink-500 text-glow-cyber">DIGITAL</span>
+            </h1>
+            <p class="text-xs md:text-sm text-white/70 max-w-lg mb-12 font-medium bg-white/5 px-5 py-2 rounded-full border border-white/5 backdrop-blur-sm inline-block">
+                Cek Sebelum Share, dan Jadilah Generasi yang Cerdas di Dunia Digital!
+            </p>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-5 w-full max-w-4xl mt-2">
+                <div onclick="goToSlide(4)" class="cyber-card p-5 rounded-2xl text-left relative transition duration-300 hover:scale-[1.02] group cursor-pointer">
+                    <div class="corner-bracket cb-tl"></div><div class="corner-bracket cb-br"></div>
+                    <p class="text-cyan-400 text-[9px] font-bold mb-1 font-cyber tracking-wider">❓ BUBBLE QUESTION 1</p>
+                    <p class="text-white/80 font-bold text-sm leading-snug group-hover:text-cyan-300 transition">Tantangan dalam media digital apa aja sih?</p>
+                </div>
+                <div onclick="goToSlide(2)" class="cyber-card p-5 rounded-2xl text-left relative transition duration-300 hover:scale-[1.02] group cursor-pointer">
+                    <div class="corner-bracket cb-tl"></div><div class="corner-bracket cb-br"></div>
+                    <p class="text-purple-400 text-[9px] font-bold mb-1 font-cyber tracking-wider">❓ BUBBLE QUESTION 2</p>
+                    <p class="text-white/80 font-bold text-sm leading-snug group-hover:text-purple-300 transition">Apa itu literasi digital?</p>
+                </div>
+                <div onclick="goToSlide(3)" class="cyber-card p-5 rounded-2xl text-left relative transition duration-300 hover:scale-[1.02] group cursor-pointer">
+                    <div class="corner-bracket cb-tl"></div><div class="corner-bracket cb-br"></div>
+                    <p class="text-pink-400 text-[9px] font-bold mb-1 font-cyber tracking-wider">❓ BUBBLE QUESTION 3</p>
+                    <p class="text-white/80 font-bold text-sm leading-snug group-hover:text-pink-300 transition">Mengapa literasi digital itu penting?</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 2: PENGERTIAN -->
+        <section id="slide-2" class="slide flex-col items-center hidden w-full max-w-3xl">
+            <h2 class="text-2xl md:text-4xl font-black font-cyber text-white mb-6 text-center tracking-wide border-b border-cyan-500/30 pb-2 uppercase">Apa Itu Literasi Digital?</h2>
+            <div class="cyber-card p-8 rounded-3xl space-y-5 relative">
+                <div class="corner-bracket cb-tl"></div><div class="corner-bracket cb-tr"></div><div class="corner-bracket cb-bl"></div><div class="corner-bracket cb-br"></div>
+                <p class="text-sm md:text-base leading-relaxed text-white/80 font-medium">
+                    Literasi digital adalah kemampuan menggunakan teknologi, internet, dan media sosial secara cerdas, aman, serta bertanggung jawab. Dengan literasi digital, kita dapat memahami informasi dengan baik dan memanfaatkan teknologi untuk hal-hal yang bermanfaat.
+                </p>
+                <div class="h-[1px] bg-white/5 my-4"></div>
+                <p class="text-sm md:text-base leading-relaxed text-white/80 font-medium">
+                    Di era modern ini, hampir semua aktivitas melibatkan teknologi. Literasi digital membantu kita menghindari hoaks, menjaga keamanan data pribadi, berkomunikasi dengan baik di internet, serta menggunakan teknologi untuk belajar dan mengembangkan potensi diri.
+                </p>
+            </div>
+        </section>
+
+        <!-- SLIDE 3: PENTINGNYA LITERASI -->
+        <section id="slide-3" class="slide flex-col items-center hidden w-full max-w-4xl">
+            <h2 class="text-2xl md:text-4xl font-black font-cyber text-white mb-8 text-center tracking-wide border-b border-purple-500/30 pb-2 uppercase">Mengapa Ini Penting?</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 w-full">
+                <div class="cyber-card p-6 rounded-2xl relative">
+                    <div class="corner-bracket cb-tl"></div><div class="corner-bracket cb-br"></div>
+                    <p class="leading-relaxed text-xs md:text-sm text-white/80 font-medium">
+                        Literasi digital penting karena membantu kita menggunakan teknologi dan internet secara cerdas, aman, dan bertanggung jawab. Di era digital, informasi dapat menyebar dengan cepat, tetapi tidak semuanya dapat dipercaya. Dengan kompetensi yang kritis, kita mampu menyaring informasi valid.
+                    </p>
+                </div>
+                <div class="cyber-card p-6 rounded-2xl relative">
+                    <div class="corner-bracket cb-tr"></div><div class="corner-bracket cb-bl"></div>
+                    <p class="leading-relaxed text-xs md:text-sm text-white/80 font-medium">
+                        Selain itu, literasi digital membantu kita menghindari penipuan siber, melindungi aset atau data pribadi berharga, menghindari penyebaran ujaran kebencian, serta memanfaatkan teknologi sebagai media produktif untuk masa depan karir kita di industri digital.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 4: MENU DAFTAR ANCAMAN -->
+        <section id="slide-4" class="slide flex-col items-center hidden w-full max-w-3xl">
+            <h2 class="text-2xl md:text-4xl font-black font-cyber text-white mb-2 text-center tracking-wide uppercase">Ancaman & Tantangan</h2>
+            <p class="text-center text-cyan-400/70 font-cyber text-[9px] tracking-widest mb-6 uppercase font-bold">Menu Navigasi Cepat (Klik untuk Melompat)</p>
+            
+            <div class="cyber-card p-6 rounded-3xl w-full max-w-xl space-y-3 relative">
+                <div class="corner-bracket cb-tl"></div><div class="corner-bracket cb-tr"></div><div class="corner-bracket cb-bl"></div><div class="corner-bracket cb-br"></div>
+                <div onclick="goToSlide(5)" class="bg-white/5 p-4 rounded-xl flex items-center justify-between cursor-pointer hover:bg-red-500/10 border border-white/5 transition duration-200 group">
+                    <div class="flex items-center gap-4">
+                        <div class="w-8 h-8 rounded-lg bg-red-500/10 flex items-center justify-center font-bold text-red-400 font-cyber text-sm">01</div>
+                        <span class="font-bold text-xs md:text-sm text-white/80">Phishing dan Penipuan Online</span>
+                    </div>
+                    <span class="text-xs text-white/20 group-hover:text-red-400">LIHAT &rarr;</span>
+                </div>
+                <div onclick="goToSlide(6)" class="bg-white/5 p-4 rounded-xl flex items-center justify-between cursor-pointer hover:bg-amber-500/10 border border-white/5 transition duration-200 group">
+                    <div class="flex items-center gap-4">
+                        <div class="w-8 h-8 rounded-lg bg-amber-500/10 flex items-center justify-center font-bold text-amber-400 font-cyber text-sm">02</div>
+                        <span class="font-bold text-xs md:text-sm text-white/80">Penyebaran Hoaks</span>
+                    </div>
+                    <span class="text-xs text-white/20 group-hover:text-amber-400">LIHAT &rarr;</span>
+                </div>
+                <div onclick="goToSlide(7)" class="bg-white/5 p-4 rounded-xl flex items-center justify-between cursor-pointer hover:bg-teal-500/10 border border-white/5 transition duration-200 group">
+                    <div class="flex items-center gap-4">
+                        <div class="w-8 h-8 rounded-lg bg-teal-500/10 flex items-center justify-center font-bold text-teal-400 font-cyber text-sm">03</div>
+                        <span class="font-bold text-xs md:text-sm text-white/80">Cyberbullying</span>
+                    </div>
+                    <span class="text-xs text-white/20 group-hover:text-teal-400">LIHAT &rarr;</span>
+                </div>
+                <div onclick="goToSlide(8)" class="bg-white/5 p-4 rounded-xl flex items-center justify-between cursor-pointer hover:bg-purple-500/10 border border-white/5 transition duration-200 group">
+                    <div class="flex items-center gap-4">
+                        <div class="w-8 h-8 rounded-lg bg-purple-500/10 flex items-center justify-center font-bold text-purple-400 font-cyber text-sm">04</div>
+                        <span class="font-bold text-xs md:text-sm text-white/80">Kecanduan Gadget</span>
+                    </div>
+                    <span class="text-xs text-white/20 group-hover:text-purple-400">LIHAT &rarr;</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 5: PHISHING DASAR -->
+        <section id="slide-5" class="slide flex-col hidden w-full max-w-4xl">
+            <div class="text-center mb-5">
+                <span class="px-3 py-1 bg-red-500/5 border border-red-500/20 text-red-400 rounded-full text-[9px] font-bold tracking-widest font-cyber">TANTANGAN NO. 1</span>
+                <h2 class="text-2xl md:text-4xl font-black font-cyber text-white mt-1 uppercase">Phishing & Penipuan</h2>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                <div class="cyber-card p-6 rounded-2xl relative">
+                    <div class="corner-bracket cb-tl"></div>
+                    <h3 class="text-xs font-bold text-red-400 mb-2 uppercase font-cyber tracking-wider">Definisi Singkat</h3>
+                    <p class="text-xs md:text-sm leading-relaxed text-white/80 font-medium">
+                        Pernah mendapat pesan mencurigakan yang meminta kata sandi, kode OTP, atau data bank? Waspada, itu phishing! Phishing adalah rekayasa penipuan digital untuk mencuri informasi akun sensitif dengan menyamar sebagai instansi resmi terpercaya.
+                    </p>
+                </div>
+                <div class="cyber-card p-6 rounded-2xl relative">
+                    <div class="corner-bracket cb-tr"></div>
+                    <h3 class="text-xs font-bold text-emerald-400 mb-2 uppercase font-cyber tracking-wider">Langkah Proteksi</h3>
+                    <ul class="text-[11px] md:text-xs space-y-1.5 text-white/80 font-medium">
+                        <li class="flex items-start gap-1.5"><span>⚡</span> Jangan sembarang klik link asing di SMS/WA/Email.</li>
+                        <li class="flex items-start gap-1.5"><span>⚡</span> Amati baik-baik kredibilitas URL/domain website.</li>
+                        <li class="flex items-start gap-1.5"><span>⚡</span> Rahasiakan kode OTP dan PIN dari siapa pun.</li>
+                        <li class="flex items-start gap-1.5"><span>⚡</span> Selalu aktifkan Otentikasi Dua Faktor (2FA).</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 6: PENYEBARAN HOAKS (DARI IMG-20260610-WA0138_2.jpg) -->
+        <section id="slide-6" class="slide flex-col hidden w-full max-w-4xl">
+            <div class="text-center mb-4">
+                <span class="px-3 py-1 bg-amber-500/5 border border-amber-500/20 text-amber-400 rounded-full text-[9px] font-bold tracking-widest font-cyber">TANTANGAN NO. 2</span>
+                <h2 class="text-2xl md:text-4xl font-black font-cyber text-white mt-1 uppercase">Penyebaran Hoaks</h2>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div class="cyber-card p-5 rounded-2xl">
+                    <h3 class="text-xs font-bold text-amber-400 mb-2 font-cyber tracking-wider uppercase">Pengertian</h3>
+                    <p class="text-[11px] md:text-xs leading-relaxed text-white/80">
+                        Di era digital, informasi menyebar hanya dalam hitungan detik. Karena itu, kemampuan membedakan fakta dan hoaks menjadi semakin penting. <strong>Hoaks adalah informasi atau berita palsu</strong> yang dibuat untuk menipu, menyesatkan, atau memengaruhi orang lain seolah-olah informasi tersebut benar.
+                    </p>
+                </div>
+                <div class="cyber-card p-5 rounded-2xl">
+                    <h3 class="text-xs font-bold text-amber-400 mb-2 font-cyber tracking-wider uppercase">Contoh Kasus</h3>
+                    <ul class="text-[11px] md:text-xs space-y-1 text-white/70 list-disc list-inside">
+                        <li>Berita tanpa periksa sumber.</li>
+                        <li>Info kesehatan belum terbukti.</li>
+                        <li>Pesan berantai palsu/menyesatkan.</li>
+                        <li>Foto/video hasil edit manipulatif.</li>
+                        <li>Rumor personal tanpa bukti jelas.</li>
+                    </ul>
+                </div>
+                <div class="cyber-card p-5 rounded-2xl">
+                    <h3 class="text-xs font-bold text-emerald-400 mb-2 font-cyber tracking-wider uppercase">Cara Menghindari</h3>
+                    <ul class="text-[11px] md:text-xs space-y-1 text-white/80">
+                        <li>✔ Periksa validitas sumber utama.</li>
+                        <li>✔ Bandingkan media terpercaya.</li>
+                        <li>✔ Baca utuh, jangan cuma judul.</li>
+                        <li>✔ Periksa tanggal & konteksnya.</li>
+                        <li>✔ Jangan asal share info buram.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 7: CYBERBULLYING (DARI IMG-20260610-WA0137_2.jpg) -->
+        <section id="slide-7" class="slide flex-col hidden w-full max-w-4xl">
+            <div class="text-center mb-4">
+                <span class="px-3 py-1 bg-teal-500/5 border border-teal-500/20 text-teal-400 rounded-full text-[9px] font-bold tracking-widest font-cyber">TANTANGAN NO. 3</span>
+                <h2 class="text-2xl md:text-4xl font-black font-cyber text-white mt-1 uppercase">Cyberbullying</h2>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div class="cyber-card p-5 rounded-2xl">
+                    <h3 class="text-xs font-bold text-teal-400 mb-2 font-cyber tracking-wider uppercase">Pengertian</h3>
+                    <p class="text-[11px] md:text-xs leading-relaxed text-white/80">
+                        Pernah melihat atau bahkan mengalami ejekan di media sosial? Itu bisa termasuk cyberbullying. <strong>Cyberbullying adalah tindakan menyakiti, menghina, mengintimidasi, atau mempermalukan seseorang melalui media digital</strong>, seperti medsos, game online, chat, atau platform lainnya.
+                    </p>
+                </div>
+                <div class="cyber-card p-5 rounded-2xl">
+                    <h3 class="text-xs font-bold text-teal-400 mb-2 font-cyber tracking-wider uppercase">Contoh Tindakan</h3>
+                    <ul class="text-[11px] md:text-xs space-y-1 text-white/70 list-disc list-inside">
+                        <li>Komentar hinaan di media sosial.</li>
+                        <li>Sebar data pribadi tanpa izin.</li>
+                        <li>Bikin akun palsu pencemar nama.</li>
+                        <li>Mengucilkan orang dari grup chat.</li>
+                        <li>Sebar rumor fitnah di internet.</li>
+                    </ul>
+                </div>
+                <div class="cyber-card p-5 rounded-2xl">
+                    <h3 class="text-xs font-bold text-emerald-400 mb-2 font-cyber tracking-wider uppercase">Cara Menghindari</h3>
+                    <ul class="text-[11px] md:text-xs space-y-1 text-white/80">
+                        <li>✔ Sopan dan saling menghargai.</li>
+                        <li>✔ Jangan balas akun provokatif.</li>
+                        <li>✔ Blokir & laporkan pelaku bulis.</li>
+                        <li>✔ Proteksi ketat info pribadi.</li>
+                        <li>✔ Adukan ke orang tua atau guru.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 8: GADGET BERLEBIHAN (DARI IMG-20260610-WA0139_2.jpg) -->
+        <section id="slide-8" class="slide flex-col hidden w-full max-w-4xl">
+            <div class="text-center mb-4">
+                <span class="px-3 py-1 bg-purple-500/5 border border-purple-500/20 text-purple-400 rounded-full text-[9px] font-bold tracking-widest font-cyber">TANTANGAN NO. 4</span>
+                <h2 class="text-2xl md:text-4xl font-black font-cyber text-white mt-1 uppercase">Kecanduan Gadget</h2>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div class="cyber-card p-5 rounded-2xl">
+                    <h3 class="text-xs font-bold text-purple-400 mb-2 font-cyber tracking-wider uppercase">Pengertian</h3>
+                    <p class="text-[11px] md:text-xs leading-relaxed text-white/80">
+                        Gadget memang membantu banyak aktivitas, tetapi penggunaannya tetap perlu dibatasi. Jika digunakan terlalu lama, gadget dapat berdampak buruk. <strong>Penggunaan gadget berlebihan adalah kondisi ketika seseorang menggunakan perangkat digital terlalu lama</strong> hingga mengganggu kesehatan, fokus, dan harian.
+                    </p>
+                </div>
+                <div class="cyber-card p-5 rounded-2xl">
+                    <h3 class="text-xs font-bold text-purple-400 mb-2 font-cyber tracking-wider uppercase">Gejala & Contoh</h3>
+                    <ul class="text-[11px] md:text-xs space-y-1 text-white/70 list-disc list-inside">
+                        <li>Main game/medsos lupa waktu.</li>
+                        <li>Tetap main hp saat jam belajar.</li>
+                        <li>Doomscrolling sebelum tidur lama.</li>
+                        <li>Apatis dengan orang sekitar.</li>
+                        <li>Gelisah jika jauh dari ponsel.</li>
+                    </ul>
+                </div>
+                <div class="cyber-card p-5 rounded-2xl">
+                    <h3 class="text-xs font-bold text-emerald-400 mb-2 font-cyber tracking-wider uppercase">Cara Menghindari</h3>
+                    <ul class="text-[11px] md:text-xs space-y-1 text-white/80">
+                        <li>✔ Batasi durasi screen-time harian.</li>
+                        <li>✔ Utamakan belajar & istirahat.</li>
+                        <li>✔ Olahraga atau lakukan hobi fisik.</li>
+                        <li>✔ Jauhkan gadget sebelum tidur.</li>
+                        <li>✔ Manfaatkan untuk hal produktif.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 9: CONTOH KASUS PHISHING (REQUEST KHUSUS LU) -->
+        <section id="slide-9" class="slide flex-col hidden w-full max-w-3xl">
+            <div class="text-center mb-5">
+                <span class="px-3 py-1 bg-red-500/10 border border-red-500/30 text-red-400 rounded-full text-[9px] font-bold tracking-widest font-cyber">ALERT CASE STUDY</span>
+                <h2 class="text-2xl md:text-4xl font-black font-cyber text-white mt-1 uppercase">Contoh Kasus Phishing</h2>
+            </div>
+            <div class="cyber-card p-6 rounded-3xl relative border border-red-500/20 bg-red-950/5">
+                <div class="corner-bracket cb-tl"></div><div class="corner-bracket cb-tr"></div><div class="corner-bracket cb-bl"></div><div class="corner-bracket cb-br"></div>
+                
+                <p class="text-xs md:text-sm leading-relaxed text-white/90 font-medium p-4 bg-white/[0.02] rounded-xl border border-white/5 mb-4">
+                    "Seorang pengguna menerima pesan yang mengatasnamakan bank dan menyatakan bahwa akunnya bermasalah. Pesan tersebut menyertakan tautan yang mengarah ke halaman login palsu yang tampak seperti situs resmi. Karena percaya, korban memasukkan username dan kata sandinya."
+                </p>
+                <div class="h-[1px] bg-white/5 mb-4"></div>
+                <div class="flex flex-col sm:flex-row gap-4 text-[11px] md:text-xs text-red-300">
+                    <div class="flex-1 bg-red-500/5 p-3 rounded-xl border border-red-500/10">
+                        <strong>⚠️ Eksekusi Kejahatan:</strong> Data tersebut kemudian dicuri oleh pelaku dan digunakan untuk mengambil alih akun atau melakukan transaksi tanpa izin.
+                    </div>
+                    <div class="flex-1 bg-red-500/5 p-3 rounded-xl border border-red-500/10">
+                        <strong>❌ Dampak Fatal:</strong> Mengakibatkan kerugian finansial yang signifikan serta penyalahgunaan data pribadi korban secara ilegal.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 10: KESIMPULAN (DARI IMG-20260610-WA0140_2.jpg) -->
+        <section id="slide-10" class="slide flex-col hidden w-full max-w-3xl items-center">
+            <div class="text-center mb-4">
+                <span class="px-3 py-1 bg-gradient-to-r from-cyan-400 to-purple-500 text-white rounded-full text-[9px] font-bold tracking-widest font-cyber">FINAL CONCLUSION</span>
+                <h2 class="text-2xl md:text-4xl font-black font-cyber text-white mt-1 uppercase">Smart Digital Generation</h2>
+            </div>
+            <div class="cyber-card p-6 rounded-3xl text-center space-y-4 max-w-2xl relative">
+                <div class="corner-bracket cb-tl"></div><div class="corner-bracket cb-br"></div>
+                <p class="text-xs md:text-sm leading-relaxed text-white/80 font-medium">
+                    Menjadi cerdas digital berarti mampu menggunakan teknologi secara aman, bertanggung jawab, dan bijak. Selalu jaga data pribadi agar terhindar dari phishing, periksa kebenaran informasi sebelum membagikannya untuk mencegah penyebaran hoaks, serta gunakan media sosial dengan sopan dan saling menghargai agar terhindar dari cyberbullying.
+                </p>
+                <p class="text-xs md:text-sm leading-relaxed text-white/80 font-medium">
+                    Selain itu, atur waktu penggunaan gadget dengan baik agar tidak mengganggu kesehatan, belajar, maupun aktivitas sehari-hari. Dengan sikap yang bijak, kita dapat menciptakan lingkungan digital yang aman, positif, dan bermanfaat bagi semua.
+                </p>
+                <div class="pt-2">
+                    <div class="text-slate-900 font-black tracking-wider text-[11px] md:text-xs bg-gradient-to-r from-cyan-400 via-teal-400 to-yellow-300 px-6 py-2.5 rounded-xl border border-white/10 inline-block font-cyber shadow-lg uppercase">
+                        THINK BEFORE YOU CLICK! 🚀
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="w-full px-6 py-4 bg-black/20 backdrop-blur-md flex flex-col sm:flex-row gap-4 justify-between items-center z-50 border-t border-white/5">
+        <div class="text-xs text-white/60 font-bold tracking-widest font-cyber">
+            SLIDE: <span id="slide-num" class="text-cyan-400 font-black text-sm">1</span> / 10
+        </div>
+        
+        <div class="flex items-center gap-2">
+            <button onclick="prevSlide()" class="px-4 py-2 rounded-xl bg-white/5 hover:bg-white/10 text-[10px] font-bold tracking-widest transition border border-white/5 active:scale-95 font-cyber">PREV</button>
+            
+            <div class="flex items-center gap-1.5 mx-2">
+                <span onclick="goToSlide(1)" class="dot w-3 h-3 rounded-full bg-cyan-400 cursor-pointer transition-all"></span>
+                <span onclick="goToSlide(2)" class="dot w-2 h-2 rounded-full bg-white/20 cursor-pointer transition-all"></span>
+                <span onclick="goToSlide(3)" class="dot w-2 h-2 rounded-full bg-white/20 cursor-pointer transition-all"></span>
+                <span onclick="goToSlide(4)" class="dot w-2 h-2 rounded-full bg-white/20 cursor-pointer transition-all"></span>
+                <span onclick="goToSlide(5)" class="dot w-2 h-2 rounded-full bg-white/20 cursor-pointer transition-all"></span>
+                <span onclick="goToSlide(6)" class="dot w-2 h-2 rounded-full bg-white/20 cursor-pointer transition-all"></span>
+                <span onclick="goToSlide(7)" class="dot w-2 h-2 rounded-full bg-white/20 cursor-pointer transition-all"></span>
+                <span onclick="goToSlide(8)" class="dot w-2 h-2 rounded-full bg-white/20 cursor-pointer transition-all"></span>
+                <span onclick="goToSlide(9)" class="dot w-2 h-2 rounded-full bg-white/20 cursor-pointer transition-all"></span>
+                <span onclick="goToSlide(10)" class="dot w-2 h-2 rounded-full bg-white/20 cursor-pointer transition-all"></span>
+            </div>
+            
+            <button onclick="nextSlide()" class="px-4 py-2 rounded-xl bg-white/5 hover:bg-white/10 text-[10px] font-bold tracking-widest transition border border-white/5 active:scale-95 font-cyber">NEXT</button>
+        </div>
+    </footer>
+
+    <!-- POP-UP MODAL PROFIL TEAM -->
+    <div id="profileModal" class="fixed inset-0 bg-black/80 backdrop-blur-xl z-[100] hidden items-center justify-center p-4 opacity-0 transition-opacity duration-300">
+        <div class="cyber-card p-6 md:p-8 rounded-3xl w-full max-w-2xl relative transform scale-95 transition-transform duration-300">
+            <div class="corner-bracket cb-tl"></div><div class="corner-bracket cb-tr"></div><div class="corner-bracket cb-bl"></div><div class="corner-bracket cb-br"></div>
+            
+            <button onclick="toggleProfileModal(false)" class="absolute top-4 right-4 w-8 h-8 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-white/70 hover:bg-red-500/20 hover:text-red-400 transition text-sm font-bold">&times;</button>
+            
+            <div class="text-center mb-6">
+    <span class="px-3 py-1 bg-cyan-500/5 border border-cyan-500/20 text-cyan-400 rounded-full text-[9px] font-bold tracking-widest font-cyber uppercase">
+        DEVELOPMENT TEAM
+    </span>
+
+    <div class="flex items-center justify-center gap-3 mt-2">
+        <img
+            src="logojurusan.png" alt="Logo Jurusan"
+        >
+
+        <h2 class="text-xl md:text-3xl font-black font-cyber text-white uppercase">
+            CREATOR PROFILE
+        </h2>
+    </div>
+</div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div class="bg-white/[0.02] border border-white/5 rounded-xl p-4 hover:border-cyan-500/30 transition">
+                    <h4 class="text-white font-bold text-sm md:text-base">Cinta Kurnia Andity</h4>
+                    <p class="text-cyan-400 text-[10px] font-mono tracking-wider mt-1">NISN : 12009</p>
+                    <p class="text-white/40 text-[9px] mt-2 font-cyber tracking-wide uppercase">SMKN 36 Jakarta</p>
+                </div>
+                <div class="bg-white/[0.02] border border-white/5 rounded-xl p-4 hover:border-cyan-500/30 transition">
+                    <h4 class="text-white font-bold text-sm md:text-base">Eldar Ibrahimovic Imanuddin</h4>
+                    <p class="text-cyan-400 text-[10px] font-mono tracking-wider mt-1">NISN : 12015</p>
+                    <p class="text-white/40 text-[9px] mt-2 font-cyber tracking-wide uppercase">SMKN 36 Jakarta</p>
+                </div>
+                <div class="bg-white/[0.02] border border-white/5 rounded-xl p-4 hover:border-cyan-500/30 transition">
+                    <h4 class="text-white font-bold text-sm md:text-base">Maghfiro Al Ula</h4>
+                    <p class="text-cyan-400 text-[10px] font-mono tracking-wider mt-1">NISN : 12024</p>
+                    <p class="text-white/40 text-[9px] mt-2 font-cyber tracking-wide uppercase">SMKN 36 Jakarta</p>
+                </div>
+                <div class="bg-white/[0.02] border border-white/5 rounded-xl p-4 hover:border-cyan-500/30 transition">
+                    <h4 class="text-white font-bold text-sm md:text-base">Ridho Pratama</h4>
+                    <p class="text-cyan-400 text-[10px] font-mono tracking-wider mt-1">NISN : 12035</p>
+                    <p class="text-white/40 text-[9px] mt-2 font-cyber tracking-wide uppercase">SMKN 36 Jakarta</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CORE ENGINE JAVASCRIPT SYSTEM -->
+    <script>
+        let currentSlide = 1;
+        const totalSlides = 10;
+
+        // Auto generator partikel bintang background
+        document.addEventListener("DOMContentLoaded", () => {
+            const body = document.body;
+            const starContainer = document.createElement('div');
+            starContainer.className = 'star-container';
+            body.appendChild(starContainer);
+
+            for (let i = 0; i < 65; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                star.style.top = `${Math.random() * 100}vh`;
+                star.style.left = `${Math.random() * 100}vw`;
+                star.style.animationDuration = `${2.5 + Math.random() * 3}s`;
+                star.style.animationDelay = `${Math.random() * 5}s`;
+                const size = 1 + Math.random() * 1.5;
+                star.style.width = `${size}px`;
+                star.style.height = `${size}px`;
+                starContainer.appendChild(star);
+            }
+        });
+
+        // Controller Render UI Slide
+        function updateSlideUI() {
+            document.querySelectorAll('.slide').forEach(slide => {
+                slide.classList.remove('slide-active');
+            });
+            const activeSlide = document.getElementById(`slide-${currentSlide}`);
+            if (activeSlide) activeSlide.classList.add('slide-active');
+            
+            document.getElementById('slide-num').innerText = currentSlide;
+            
+            document.querySelectorAll('.dot').forEach((dot, index) => {
+                if (index + 1 === currentSlide) {
+                    dot.className = "dot w-3 h-3 rounded-full bg-cyan-400 cursor-pointer transition-all duration-300 shadow-[0_0_8px_#00f2fe]";
+                } else {
+                    dot.className = "dot w-2 h-2 rounded-full bg-white/20 cursor-pointer transition-all duration-300 hover:bg-white/40";
+                }
+            });
+        }
+
+        function nextSlide() { if (currentSlide < totalSlides) { currentSlide++; updateSlideUI(); } }
+        function prevSlide() { if (currentSlide > 1) { currentSlide--; updateSlideUI(); } }
+        function goToSlide(idx) { if (idx >= 1 && idx <= totalSlides) { currentSlide = idx; updateSlideUI(); } }
+
+        // Keyboard navigation binding
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' || e.key === ' ') nextSlide();
+            else if (e.key === 'ArrowLeft') prevSlide();
+        });
+
+        // Modal triggers
+        function toggleProfileModal(show) {
+            const m = document.getElementById('profileModal');
+            const box = m.querySelector('.cyber-card');
+            if (show) {
+                m.classList.remove('hidden'); m.classList.add('flex');
+                setTimeout(() => { m.classList.remove('opacity-0'); box.classList.remove('scale-95'); }, 20);
+            } else {
+                m.classList.add('opacity-0'); box.classList.add('scale-95');
+                setTimeout(() => { m.classList.remove('flex'); m.classList.add('hidden'); }, 300);
+            }
+        }
+    </script>
+</body>
+</html>
